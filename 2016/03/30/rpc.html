@@ -32,8 +32,23 @@
 <blockquote>
 <p>调用流程</p>
 </blockquote>
-<p><img src="https://www.cs.rutgers.edu/~pxk/417/notes/images/rpc-flow.png" alt=""></p>
-<p>1.</p>
+<p><img src="https://www.cs.rutgers.edu/~pxk/417/notes/images/rpc-flow.png" alt="调用流程图"></p>
+<p>1.服务消费方clinet调用本地服务client stub（存根）；</p>
+<p>2.client stub封装functions信息（方法名、参数等）用于网络传输（编码、序列化）；</p>
+<p>3.client stub通过socket找到服务地址，并将消息发给服务端；</p>
+<p>4.server stub接收到消息（解码、反序列化）；</p>
+<p>5.server stub调用本地function（服务）；</p>
+<p>6.本地服务将执行结果返回给server stub；</p>
+<p>7-8.server stub将结果封装成消息（编码、序列化），通过socket 传输消息给client stub；</p>
+<p>9-10.client stub解析消息（解码、反序列化）把调用结果返回给client。</p>
+<blockquote>
+<p>RPC调用过程中要面临的问题</p>
+</blockquote>
+<ul>
+<li>序列化、反序列化        Protobuf  Thrift</li>
+<li>Socket 通信                    BIO NIO</li>
+<li>服务寻址                         Zookeeper</li>
+</ul>
 <p>参考：<a href="https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html" target="_blank" rel="external">https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html</a></p>
 
 
