@@ -15,7 +15,8 @@
   font-size: 0.85em;
 }
  pre, code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace
+  /*font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;*/
 }
  code {
   background: #eee;
