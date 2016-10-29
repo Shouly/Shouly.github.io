@@ -45,9 +45,18 @@
 <p>RPC调用过程中要面临的问题</p>
 </blockquote>
 <ul>
-<li>序列化、反序列化        Hessian JSON XML Protobuf  Thrift</li>
+<li>序列化、反序列化        Hession JSON XML Protobuf  Thrift</li>
 <li>Socket 通信                    BIO NIO</li>
 <li>服务寻址                         Zookeeper</li>
+</ul>
+<blockquote>
+<p>Java 与 RPC</p>
+</blockquote>
+<p>调用远程服务时使用代理模式封装通信细节，使用起来就像调用本地服务一样。</p>
+<p>实现方式：</p>
+<ul>
+<li>JDK动态代理</li>
+<li>字节码生成技术</li>
 </ul>
 <p>参考：<a href="https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html" target="_blank" rel="external">https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html</a></p>
 
