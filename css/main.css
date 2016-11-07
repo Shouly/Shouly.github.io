@@ -1,9 +1,9 @@
 body {
-  font-family: "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-  font-size: 16px;
-  margin: 5% 20% 5% 18%;
+  font-family: STFangSong, Helvetica, Arial, Vernada, Tahoma, STXihei, "Microsoft YaHei", "Songti SC", SimSun, Heiti, sans-serif;
+  font-size: 18px;
+  margin: 5% 20% 5% 20%;
   padding: 2% 5% 5% 5%;
-  width: 54%;
+  width: 50%;
   line-height: 150%;
   border: 1px solid LightGrey;
 }
@@ -100,11 +100,11 @@ table tr:nth-child(odd) {
 }
 pre,
 .highlight {
-  background: #B3DECA;
+  background: #f7f7f7;
   margin: 20px 0;
   padding: 15px;
   overflow: auto;
-  font-size: 15px;
+  font-size: $code-font-size;
   color: #4d4d4c;
   line-height: $line-height-code-block;
 }
@@ -113,7 +113,7 @@ pre,
 }
 pre,
 code {
-  font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
+  font-family: "Input Mono", "PT Mono", Consolas, Monaco, Menlo, monospace;
 }
 code {
   word-break: break-all;
