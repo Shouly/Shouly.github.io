@@ -1,5 +1,5 @@
  pre, .highlight {
-  background: rgba(150, 211, 183, 0.73);
+  background: #B3DECA;
   margin: 0 -20px;
   padding: 15px 20px;
   border-style: solid;
@@ -15,7 +15,7 @@
   font-size: 0.85em;
 }
  pre, code {
-  font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace;
+  font-family: Inconsolata, Consolas, "DEJA VU SANS MONO", "DROID SANS MONO", Proggy, monospace;
 }
  code {
   background: #eee;
