@@ -27,7 +27,7 @@
 <p>JDK</p>
 </blockquote>
 <p>​    两个角色：Proxy、InvocationHandler</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Proxy</div><div class="line">	Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h);</div><div class="line">InvocationHandler</div><div class="line">  	<span class="comment">/*</span></div><div class="line">  	* @param proxy 由字节码生成的代理对象 命名方式:xxx.xx.$ProxyN N:代表生产的第一个proxy实例</div><div class="line">  	*/</div><div class="line">	<span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy,Method method,Object[] args)</span></span>;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Proxy</div><div class="line">Proxy.newProxyInstance(ClassLoader loader,Class&lt;?&gt;[] interfaces,InvocationHandler h);</div><div class="line">InvocationHandler</div><div class="line"><span class="comment">/*</span></div><div class="line">* @param proxy 由字节码生成的代理对象 命名方式:xxx.xx.$ProxyN N:代表生产的第一个proxy实例</div><div class="line">*/</div><div class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy,Method method,Object[] args)</span></span>;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>cglib</p>
 </blockquote>
