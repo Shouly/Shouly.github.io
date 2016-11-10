@@ -1,6 +1,6 @@
 body {
   font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 15px;
+  font-size: 17px;
   margin: 5% 20% 5% 20%;
   padding: 2% 5% 5% 5%;
   width: 50%;
@@ -79,7 +79,7 @@ table {
 }
 table td,
 table th {
-  font-size: 1em;
+  font-size: 13px;
   border: 1px solid #8e908c;
   padding: 3px 7px 2px 7px;
 }
