@@ -23,6 +23,31 @@
 
 <body>
 
+<h3 id="分布式锁的几种实现方式"><a href="#分布式锁的几种实现方式" class="headerlink" title="分布式锁的几种实现方式"></a>分布式锁的几种实现方式</h3><ol>
+<li><p>DB</p>
+<p>并发下的问题：</p>
+<p>​    丢失更新：</p>
+<p>​    脏读：</p>
+<ul>
+<li><p>悲观锁</p>
+<p>行级锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where x = 1 for update;</div></pre></td></tr></table></figure>
+<p>表级锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table for update;</div></pre></td></tr></table></figure>
+<p>此时只有执行完了for update操作，即该事务commit后，其他select for update、update操作才会执行，但单纯的select操作完全可以执行。</p>
+</li>
+<li><p>乐观锁</p>
+<p>​</p>
+</li>
+</ul>
+</li>
+<li><p>Redis</p>
+<p>​</p>
+</li>
+<li><p>Zookeeper</p>
+<p>​</p>
+</li>
+</ol>
 
 
 
