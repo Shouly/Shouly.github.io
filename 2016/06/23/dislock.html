@@ -31,12 +31,14 @@
 <p>​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。</p>
 <ul>
 <li><p>悲观锁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where x = 1 for update;//行级锁</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where id = 1 for update;//行级锁 要有明确的主键</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table for update;//表级锁</div></pre></td></tr></table></figure>
 <p>此时只有执行完了for update操作，即该事务commit后，其他select for update、update操作才会执行，但单纯的select操作完全可以执行。</p>
 </li>
 <li><p>乐观锁</p>
-<p>​</p>
+<p>使用版本号或者时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select x1,x2 ... ,version from table where x1 = 1;</div><div class="line">update table set version = version + 1 where x1 = 1 and version = ?</div></pre></td></tr></table></figure>
+<p>乐观锁不能解决脏读的问题。</p>
 </li>
 </ul>
 <blockquote>
