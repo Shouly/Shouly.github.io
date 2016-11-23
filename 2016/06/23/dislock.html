@@ -27,8 +27,8 @@
 <p>DB</p>
 </blockquote>
 <p>并发下的问题：</p>
-<p>​    丢失更新：</p>
-<p>​    脏读：</p>
+<p>​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。</p>
+<p>​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。</p>
 <ul>
 <li><p>悲观锁</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where x = 1 for update;//行级锁</div></pre></td></tr></table></figure>
