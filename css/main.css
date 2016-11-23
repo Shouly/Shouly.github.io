@@ -43,8 +43,8 @@ li {
 }
 blockquote {
   border-left: 4px #d3d3d3 solid;
-  padding-left: 5px;
   margin-left: 20px;
+  font-size: 18px;
 }
 a {
   text-decoration: none;
