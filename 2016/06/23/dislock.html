@@ -1,20 +1,266 @@
-extends partial/layout
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>分布式锁的几种实现方式 | Shouly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="分布式锁的几种实现方式
+DB
 
-block site_title
-    != page.title + " · " + config.title
+并发下的问题：
+​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。
+​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+悲观锁
+1select * from table where id = 1 for update;//行级锁">
+<meta property="og:type" content="article">
+<meta property="og:title" content="分布式锁的几种实现方式">
+<meta property="og:url" content="http://yoursite.com/2016/06/23/dislock.html">
+<meta property="og:site_name" content="Shouly">
+<meta property="og:description" content="分布式锁的几种实现方式
+DB
 
-block container
-    include mixins/post
-    +post(page)
+并发下的问题：
+​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。
+​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+悲观锁
+1select * from table where id = 1 for update;//行级锁">
+<meta property="og:updated_time" content="2017-03-13T13:48:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="分布式锁的几种实现方式">
+<meta name="twitter:description" content="分布式锁的几种实现方式
+DB
 
-block copyright
-    include partial/copyright
+并发下的问题：
+​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。
+​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。
+
+悲观锁
+1select * from table where id = 1 for update;//行级锁">
+  
+    <link rel="alternate" href="/atom.xml" title="Shouly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shouly</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-dislock" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/23/dislock.html" class="article-date">
+  <time datetime="2016-06-23T09:50:20.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      分布式锁的几种实现方式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="分布式锁的几种实现方式"><a href="#分布式锁的几种实现方式" class="headerlink" title="分布式锁的几种实现方式"></a>分布式锁的几种实现方式</h2><blockquote>
+<p>DB</p>
+</blockquote>
+<p>并发下的问题：</p>
+<p>​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。</p>
+<p>​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。</p>
+<ul>
+<li><p>悲观锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where id = 1 for update;//行级锁 要有明确的主键</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table for update;//表级锁</div></pre></td></tr></table></figure>
+<p>注：此时只有执行完了for update操作，即该事务commit后，其他select for update、update操作才会执行，但单纯的select操作完全可以执行。</p>
+</li>
+<li><p>乐观锁</p>
+<p>使用版本号或者时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select x1,x2 ... ,version from table where x1 = 1;</div><div class="line">update table set version = version + 1 where x1 = 1 and version = ?</div></pre></td></tr></table></figure>
+<p>乐观锁不能解决脏读的问题。</p>
+<p>注：效率低下，只能根据业务场景适量选择。</p>
+<p>​    需要客户端不断重试获取锁。</p>
+</li>
+</ul>
+<blockquote>
+<p>Redis</p>
+</blockquote>
+<p>​    4个命令：setnx get getset del</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> exsits = setNX(lock.key,System.curtime + timeout);</div><div class="line"></div><div class="line"><span class="comment">//获得锁</span></div><div class="line"><span class="keyword">if</span>(exsits == <span class="number">1</span>)&#123;</div><div class="line">    <span class="comment">//todo business</span></div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    <span class="comment">//防止死锁，释放锁</span></div><div class="line">    <span class="keyword">if</span>( doBusinessTime &lt; timeout)&#123;</div><div class="line">      del(lock.key);</div><div class="line">    &#125;</div><div class="line">&#125;<span class="keyword">else</span>&#123;<span class="comment">//exsits == 0</span></div><div class="line">    <span class="keyword">long</span> oldExpireTime = get(lock.key);</div><div class="line">    <span class="comment">//锁过期</span></div><div class="line">    <span class="keyword">if</span>(oldExpireTime &lt; System.curtime)&#123;</div><div class="line">      <span class="keyword">long</span> _oldExpireTime = getset(lock.key, System.curtime + timeout);</div><div class="line">      <span class="comment">//锁没有被其他线程（进程）获取</span></div><div class="line">      <span class="keyword">if</span>(oldExpireTime == _oldExpireTime)&#123;</div><div class="line">          <span class="comment">//获得锁</span></div><div class="line">          <span class="comment">//todo business</span></div><div class="line">          ...</div><div class="line">          ...</div><div class="line">          <span class="comment">//防止死锁，释放锁</span></div><div class="line">          <span class="keyword">if</span>( doBusinessTime &lt; timeout)&#123;</div><div class="line">            del(lock.key);</div><div class="line">          &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//重试或者阻塞</span></div><div class="line">          &#125;</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="comment">//重试或者阻塞</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​    注：timeout 的值应根据业务来设，因为当业务逻辑执行时间过长，比timeout长时，依然存在并发问题；</p>
+<p>​        这几个命令在redis集群下情况将很复杂，将会有问题；</p>
+<p>​        需要客户端不断重试获取锁。</p>
+<blockquote>
+<p>ZooKeeper</p>
+</blockquote>
+<p>​    求最小节点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>&#123;</div><div class="line">    path = 在父节点下创建临时顺序节点</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        children = 获取父节点的所有节点</div><div class="line">        <span class="keyword">if</span>(path是children中的最小的)&#123;</div><div class="line">            <span class="comment">//获取锁</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            添加监控前一个节点是否存在的<span class="function">watcher</span></div><div class="line">            <span class="title">wait</span><span class="params">()</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">watcher中的内容&#123;</div><div class="line">    notifyAll();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//释放锁</span></div><div class="line">删除结点</div></pre></td></tr></table></figure>
+<p>注：可靠性最好，实现最简单的方式。但是需要额外维护成本，依业务场景选择；</p>
+<p>​    通过服务器端通知客户端锁被释放。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/23/dislock.html" data-id="cj86x84040002xdfyh0y2cbq3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/07/05/java-nio.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Java NIO Summary
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/30/rpc.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">RPC概述</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/05/java-nio.html">Java NIO Summary</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/rpc.html">RPC概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/rest.html">对REST的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/17/dynamic-proxy.html">动态代理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Shouly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,12 +1,434 @@
-extends partial/layout
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Shouly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Shouly">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Shouly">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shouly">
+  
+    <link rel="alternate" href="/atom.xml" title="Shouly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-block container
-    include mixins/post
-    +posts()
+</head>
 
-block pagination
-    include mixins/paginator
-    +home()
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shouly</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-java-nio" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/05/java-nio.html" class="article-date">
+  <time datetime="2016-07-05T10:16:00.000Z" itemprop="datePublished">2016-07-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/07/05/java-nio.html">Java NIO Summary</a>
+    </h1>
+  
 
-block copyright
-    include partial/copyright
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Java-NIO-Summary"><a href="#Java-NIO-Summary" class="headerlink" title="Java NIO Summary"></a>Java NIO Summary</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/05/java-nio.html" data-id="cj86x84070003xdfy56fkxkof" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dislock" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/06/23/dislock.html" class="article-date">
+  <time datetime="2016-06-23T09:50:20.000Z" itemprop="datePublished">2016-06-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="分布式锁的几种实现方式"><a href="#分布式锁的几种实现方式" class="headerlink" title="分布式锁的几种实现方式"></a>分布式锁的几种实现方式</h2><blockquote>
+<p>DB</p>
+</blockquote>
+<p>并发下的问题：</p>
+<p>​    丢失更新：一个事务的更新覆盖了其它事务的更新结果。A把值从6改为2，B把值从6改为3。A的更新结果丢失。</p>
+<p>​    脏读：一个事务读取其它完成一半事务的记录时，就会发生脏读取。A、B读到值都为6，B把值改为2，A认为的值仍为6。</p>
+<ul>
+<li><p>悲观锁</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table where id = 1 for update;//行级锁 要有明确的主键</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select * from table for update;//表级锁</div></pre></td></tr></table></figure>
+<p>注：此时只有执行完了for update操作，即该事务commit后，其他select for update、update操作才会执行，但单纯的select操作完全可以执行。</p>
+</li>
+<li><p>乐观锁</p>
+<p>使用版本号或者时间戳。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">select x1,x2 ... ,version from table where x1 = 1;</div><div class="line">update table set version = version + 1 where x1 = 1 and version = ?</div></pre></td></tr></table></figure>
+<p>乐观锁不能解决脏读的问题。</p>
+<p>注：效率低下，只能根据业务场景适量选择。</p>
+<p>​    需要客户端不断重试获取锁。</p>
+</li>
+</ul>
+<blockquote>
+<p>Redis</p>
+</blockquote>
+<p>​    4个命令：setnx get getset del</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">long</span> exsits = setNX(lock.key,System.curtime + timeout);</div><div class="line"></div><div class="line"><span class="comment">//获得锁</span></div><div class="line"><span class="keyword">if</span>(exsits == <span class="number">1</span>)&#123;</div><div class="line">    <span class="comment">//todo business</span></div><div class="line">    ...</div><div class="line">    ...</div><div class="line">    <span class="comment">//防止死锁，释放锁</span></div><div class="line">    <span class="keyword">if</span>( doBusinessTime &lt; timeout)&#123;</div><div class="line">      del(lock.key);</div><div class="line">    &#125;</div><div class="line">&#125;<span class="keyword">else</span>&#123;<span class="comment">//exsits == 0</span></div><div class="line">    <span class="keyword">long</span> oldExpireTime = get(lock.key);</div><div class="line">    <span class="comment">//锁过期</span></div><div class="line">    <span class="keyword">if</span>(oldExpireTime &lt; System.curtime)&#123;</div><div class="line">      <span class="keyword">long</span> _oldExpireTime = getset(lock.key, System.curtime + timeout);</div><div class="line">      <span class="comment">//锁没有被其他线程（进程）获取</span></div><div class="line">      <span class="keyword">if</span>(oldExpireTime == _oldExpireTime)&#123;</div><div class="line">          <span class="comment">//获得锁</span></div><div class="line">          <span class="comment">//todo business</span></div><div class="line">          ...</div><div class="line">          ...</div><div class="line">          <span class="comment">//防止死锁，释放锁</span></div><div class="line">          <span class="keyword">if</span>( doBusinessTime &lt; timeout)&#123;</div><div class="line">            del(lock.key);</div><div class="line">          &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="comment">//重试或者阻塞</span></div><div class="line">          &#125;</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">        <span class="comment">//重试或者阻塞</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​    注：timeout 的值应根据业务来设，因为当业务逻辑执行时间过长，比timeout长时，依然存在并发问题；</p>
+<p>​        这几个命令在redis集群下情况将很复杂，将会有问题；</p>
+<p>​        需要客户端不断重试获取锁。</p>
+<blockquote>
+<p>ZooKeeper</p>
+</blockquote>
+<p>​    求最小节点</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">lock</span><span class="params">()</span></span>&#123;</div><div class="line">    path = 在父节点下创建临时顺序节点</div><div class="line">    <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">        children = 获取父节点的所有节点</div><div class="line">        <span class="keyword">if</span>(path是children中的最小的)&#123;</div><div class="line">            <span class="comment">//获取锁</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            添加监控前一个节点是否存在的<span class="function">watcher</span></div><div class="line">            <span class="title">wait</span><span class="params">()</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">watcher中的内容&#123;</div><div class="line">    notifyAll();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//释放锁</span></div><div class="line">删除结点</div></pre></td></tr></table></figure>
+<p>注：可靠性最好，实现最简单的方式。但是需要额外维护成本，依业务场景选择；</p>
+<p>​    通过服务器端通知客户端锁被释放。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/06/23/dislock.html" data-id="cj86x84040002xdfyh0y2cbq3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rpc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/30/rpc.html" class="article-date">
+  <time datetime="2016-03-30T14:08:35.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/30/rpc.html">RPC概述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="RPC概述"><a href="#RPC概述" class="headerlink" title="RPC概述"></a>RPC概述</h2><blockquote>
+<p>什么是RPC？</p>
+</blockquote>
+<p>Remote Procedure Call    远程过程调用协议</p>
+<p>​    RPC是一种进程间都通信协议，允许程序调用网络上的过程或函数，而不用开发者显示的编写调用细节，使用起来就像是调用本地服务，其中的网络通信对开发者来说是透明的。RPC框架能为我们解决这些通信细节。</p>
+<p>​    “RPC的主要功能是让构建分布式计算（应用）更容易，在提供强大的远程调用能力时不损失本地调用的语义简洁性。”</p>
+<blockquote>
+<p>调用流程</p>
+</blockquote>
+<p><img src="https://www.cs.rutgers.edu/~pxk/417/notes/images/rpc-flow.png" alt="调用流程图"></p>
+<p>1.服务消费方clinet调用本地服务client stub（存根）；</p>
+<p>2.client stub封装functions信息（方法名、参数等）用于网络传输（编码、序列化）；</p>
+<p>3.client stub通过socket找到服务地址，并将消息发给服务端；</p>
+<p>4.server stub接收到消息（解码、反序列化）；</p>
+<p>5.server stub调用本地function（服务）；</p>
+<p>6.本地服务将执行结果返回给server stub；</p>
+<p>7-8.server stub将结果封装成消息（编码、序列化），通过socket 传输消息给client stub；</p>
+<p>9-10.client stub解析消息（解码、反序列化）把调用结果返回给client。</p>
+<blockquote>
+<p>RPC调用过程中要面临的问题</p>
+</blockquote>
+<ul>
+<li>序列化、反序列化    Hession| JSON|XML|Google Protocol Buffers|Thrift</li>
+<li>Socket 通信              BIO NIO</li>
+<li>服务寻址                   Zookeeper</li>
+</ul>
+<blockquote>
+<p>Java 与 RPC</p>
+</blockquote>
+<p>调用远程服务时使用代理方式封装通信细节，使用起来就像调用本地服务一样。</p>
+<p>实现方式：</p>
+<ul>
+<li><a href="https://shouly.github.io/2016/03/17/dynamic-proxy.html" target="_blank" rel="external">JDK动态代理</a></li>
+<li>字节码生成技术</li>
+</ul>
+<p>参考：<a href="https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html" target="_blank" rel="external">https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/30/rpc.html" data-id="cj86x840a0005xdfy7vvmx5o9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-rest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/27/rest.html" class="article-date">
+  <time datetime="2016-03-27T02:35:19.000Z" itemprop="datePublished">2016-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/27/rest.html">对REST的理解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h2><blockquote>
+<p>Representational State Transfer  （资源的）表现层状态转化</p>
+</blockquote>
+<h3 id="1-资源（Resources）"><a href="#1-资源（Resources）" class="headerlink" title="1.资源（Resources）"></a>1.资源（Resources）</h3><p>​    一个具体URI。</p>
+<h3 id="2-表现层（Representation）"><a href="#2-表现层（Representation）" class="headerlink" title="2.表现层（Representation）"></a>2.表现层（Representation）</h3><p>​    通过Http请求，头信息里的Accept和Content-Type字段描述。</p>
+<h3 id="3-状态转化（State-Transfer）"><a href="#3-状态转化（State-Transfer）" class="headerlink" title="3.状态转化（State Transfer）"></a>3.状态转化（State Transfer）</h3><p>​    使用Http协议里的4个动词：GET、POST、PUT、DELETE，来操作资源在服务器端的状态。</p>
+<h2 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h2><h3 id="1-协议"><a href="#1-协议" class="headerlink" title="1.协议"></a>1.协议</h3><p>​    通过Http(s)协议提供API服务。</p>
+<h3 id="2-域名"><a href="#2-域名" class="headerlink" title="2.域名"></a>2.域名</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com 		通用API</div><div class="line">http://example.com/api/</div></pre></td></tr></table></figure>
+<h3 id="3-版本化（Versioning）"><a href="#3-版本化（Versioning）" class="headerlink" title="3.版本化（Versioning）"></a>3.版本化（Versioning）</h3><p>​    版本号放入URL中。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com/v1/</div><div class="line">http://api.example.com/v2/</div></pre></td></tr></table></figure>
+<p>​    版本号放入Http头信息中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl https://api.github.com/users/technoweenie -I</div><div class="line">HTTP/1.1 200 OK</div><div class="line">X-GitHub-Media-Type: github.v3</div></pre></td></tr></table></figure>
+<h3 id="4-路径（Endpoint）"><a href="#4-路径（Endpoint）" class="headerlink" title="4.路径（Endpoint）"></a>4.路径（Endpoint）</h3><p>​    路径又称”终点”（endpoint），表示API的具体网址。</p>
+<p>​    由于每个URL代表一种资源，所以URL中不能有动词，只能有名词，并且是复数形式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com/v1/books</div><div class="line">http://api.example.com/v1/foods/</div></pre></td></tr></table></figure>
+<h3 id="5-Http动词"><a href="#5-Http动词" class="headerlink" title="5.Http动词"></a>5.Http动词</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET：		从服务器取资源（1项或多项）。</div><div class="line">POST：		在服务器端新建资源。</div><div class="line">PUT：		在服务器端更新资源（客户端提供完整资源）。</div><div class="line">PATCH：		在服务器端更新资源（客户端提供改变的字段）。</div><div class="line">DELETE：		从服务器端删除资源。</div><div class="line"></div><div class="line">HEAD：		获取资源元数据。</div><div class="line">OPTIONS：	获取信息，关于资源的那些属性是客户端可以改变的。</div></pre></td></tr></table></figure>
+<p>e.g.：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GET /books  /books/ID</div><div class="line">POST /books </div><div class="line">PUT /books/ID</div><div class="line">PATCH /books/ID</div><div class="line">DELETE /books/ID</div></pre></td></tr></table></figure>
+<h3 id="6-过滤信息（Filtering）"><a href="#6-过滤信息（Filtering）" class="headerlink" title="6.过滤信息（Filtering）"></a>6.过滤信息（Filtering）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">?limit=10</div><div class="line">?offset=10</div><div class="line">?page=2&amp;per_page=50</div><div class="line">?sortby=name&amp;order=desc</div><div class="line">?book_id=1</div></pre></td></tr></table></figure>
+<h3 id="7-状态码"><a href="#7-状态码" class="headerlink" title="7.状态码"></a>7.状态码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">200 OK          		GET</div><div class="line">201 CREATED     		POST/PUT/PATCH</div><div class="line">202 Accepted    		*</div><div class="line">204 NO CONTENT  		DELETE            删除数据成功。</div><div class="line"></div><div class="line">400 Invalid Request 	POST/PUT/PATCH</div><div class="line">401 Unauthorized 		*</div><div class="line">403 Forbidden			*</div><div class="line">404 Not Found			*</div><div class="line">406 Not Acceptable		GET</div><div class="line">410 Gone				GET	</div><div class="line">422 Unprocesable Entity POST/PUT/PATCH	</div><div class="line"></div><div class="line">500 Internal Server Error *</div></pre></td></tr></table></figure>
+<p>​    <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="external">详细状态码</a></p>
+<h3 id="8-错误处理"><a href="#8-错误处理" class="headerlink" title="8.错误处理"></a>8.错误处理</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  error:"Invalid API key"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="9-返回结果"><a href="#9-返回结果" class="headerlink" title="9.返回结果"></a>9.返回结果</h3><p>​    Json格式返回符合请求的操作的结果。</p>
+<p>参考：<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/27/rest.html" data-id="cj86x84080004xdfysdwk7m7b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-dynamic-proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/17/dynamic-proxy.html" class="article-date">
+  <time datetime="2016-03-17T04:47:42.000Z" itemprop="datePublished">2016-03-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/17/dynamic-proxy.html">动态代理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动态代理"><a href="#动态代理" class="headerlink" title="动态代理"></a>动态代理</h2><blockquote>
+<p>JDK</p>
+</blockquote>
+<p>​    两个角色：Proxy、InvocationHandler</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*</span></div><div class="line">* @param interfaces 注定jdk动态代理只能代理那些有接口的类</div><div class="line">*/</div><div class="line">Proxy.newProxyInstance(ClassLoader loader,</div><div class="line">                       Class&lt;?&gt;[] interfaces,InvocationHandler h);</div><div class="line"></div><div class="line"><span class="comment">/*</span></div><div class="line">* @param proxy 由字节码生成的代理对象 </div><div class="line">*		命名方式:xxx.xx.$ProxyN N:代表产生的第N个proxy实例</div><div class="line">*/</div><div class="line"><span class="function">Object <span class="title">invoke</span><span class="params">(Object proxy,Method method,Object[] args)</span></span>;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>CGLIB  (Code Generation Library)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/17/dynamic-proxy.html" data-id="cj86x83zz0000xdfyvj8oozoj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/05/java-nio.html">Java NIO Summary</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/rpc.html">RPC概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/rest.html">对REST的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/17/dynamic-proxy.html">动态代理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Shouly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

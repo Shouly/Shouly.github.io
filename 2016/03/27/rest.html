@@ -1,20 +1,246 @@
-extends partial/layout
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>对REST的理解 | Shouly</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="REST
+Representational State Transfer  （资源的）表现层状态转化
 
-block site_title
-    != page.title + " · " + config.title
+1.资源（Resources）​    一个具体URI。
+2.表现层（Representation）​    通过Http请求，头信息里的Accept和Content-Type字段描述。
+3.状态转化（State Transfer）​    使用Http协议里的4个动词：GET、POST、PUT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对REST的理解">
+<meta property="og:url" content="http://yoursite.com/2016/03/27/rest.html">
+<meta property="og:site_name" content="Shouly">
+<meta property="og:description" content="REST
+Representational State Transfer  （资源的）表现层状态转化
 
-block description
-    - var desc = page.desc || page.title + ' - ' + config.author;
-    meta(name="description", content=desc)
+1.资源（Resources）​    一个具体URI。
+2.表现层（Representation）​    通过Http请求，头信息里的Accept和Content-Type字段描述。
+3.状态转化（State Transfer）​    使用Http协议里的4个动词：GET、POST、PUT">
+<meta property="og:updated_time" content="2016-11-05T15:53:15.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="对REST的理解">
+<meta name="twitter:description" content="REST
+Representational State Transfer  （资源的）表现层状态转化
 
-block container
-    include mixins/post
-    +post(page)
+1.资源（Resources）​    一个具体URI。
+2.表现层（Representation）​    通过Http请求，头信息里的Accept和Content-Type字段描述。
+3.状态转化（State Transfer）​    使用Http协议里的4个动词：GET、POST、PUT">
+  
+    <link rel="alternate" href="/atom.xml" title="Shouly" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
 
-block pagination
-    include mixins/paginator
-    +post()
-    include partial/comment
+</head>
 
-block copyright
-    include partial/copyright
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Shouly</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-rest" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/27/rest.html" class="article-date">
+  <time datetime="2016-03-27T02:35:19.000Z" itemprop="datePublished">2016-03-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      对REST的理解
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="REST"><a href="#REST" class="headerlink" title="REST"></a>REST</h2><blockquote>
+<p>Representational State Transfer  （资源的）表现层状态转化</p>
+</blockquote>
+<h3 id="1-资源（Resources）"><a href="#1-资源（Resources）" class="headerlink" title="1.资源（Resources）"></a>1.资源（Resources）</h3><p>​    一个具体URI。</p>
+<h3 id="2-表现层（Representation）"><a href="#2-表现层（Representation）" class="headerlink" title="2.表现层（Representation）"></a>2.表现层（Representation）</h3><p>​    通过Http请求，头信息里的Accept和Content-Type字段描述。</p>
+<h3 id="3-状态转化（State-Transfer）"><a href="#3-状态转化（State-Transfer）" class="headerlink" title="3.状态转化（State Transfer）"></a>3.状态转化（State Transfer）</h3><p>​    使用Http协议里的4个动词：GET、POST、PUT、DELETE，来操作资源在服务器端的状态。</p>
+<h2 id="RESTful-API"><a href="#RESTful-API" class="headerlink" title="RESTful API"></a>RESTful API</h2><h3 id="1-协议"><a href="#1-协议" class="headerlink" title="1.协议"></a>1.协议</h3><p>​    通过Http(s)协议提供API服务。</p>
+<h3 id="2-域名"><a href="#2-域名" class="headerlink" title="2.域名"></a>2.域名</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com 		通用API</div><div class="line">http://example.com/api/</div></pre></td></tr></table></figure>
+<h3 id="3-版本化（Versioning）"><a href="#3-版本化（Versioning）" class="headerlink" title="3.版本化（Versioning）"></a>3.版本化（Versioning）</h3><p>​    版本号放入URL中。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com/v1/</div><div class="line">http://api.example.com/v2/</div></pre></td></tr></table></figure>
+<p>​    版本号放入Http头信息中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl https://api.github.com/users/technoweenie -I</div><div class="line">HTTP/1.1 200 OK</div><div class="line">X-GitHub-Media-Type: github.v3</div></pre></td></tr></table></figure>
+<h3 id="4-路径（Endpoint）"><a href="#4-路径（Endpoint）" class="headerlink" title="4.路径（Endpoint）"></a>4.路径（Endpoint）</h3><p>​    路径又称”终点”（endpoint），表示API的具体网址。</p>
+<p>​    由于每个URL代表一种资源，所以URL中不能有动词，只能有名词，并且是复数形式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">http://api.example.com/v1/books</div><div class="line">http://api.example.com/v1/foods/</div></pre></td></tr></table></figure>
+<h3 id="5-Http动词"><a href="#5-Http动词" class="headerlink" title="5.Http动词"></a>5.Http动词</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">GET：		从服务器取资源（1项或多项）。</div><div class="line">POST：		在服务器端新建资源。</div><div class="line">PUT：		在服务器端更新资源（客户端提供完整资源）。</div><div class="line">PATCH：		在服务器端更新资源（客户端提供改变的字段）。</div><div class="line">DELETE：		从服务器端删除资源。</div><div class="line"></div><div class="line">HEAD：		获取资源元数据。</div><div class="line">OPTIONS：	获取信息，关于资源的那些属性是客户端可以改变的。</div></pre></td></tr></table></figure>
+<p>e.g.：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GET /books  /books/ID</div><div class="line">POST /books </div><div class="line">PUT /books/ID</div><div class="line">PATCH /books/ID</div><div class="line">DELETE /books/ID</div></pre></td></tr></table></figure>
+<h3 id="6-过滤信息（Filtering）"><a href="#6-过滤信息（Filtering）" class="headerlink" title="6.过滤信息（Filtering）"></a>6.过滤信息（Filtering）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">?limit=10</div><div class="line">?offset=10</div><div class="line">?page=2&amp;per_page=50</div><div class="line">?sortby=name&amp;order=desc</div><div class="line">?book_id=1</div></pre></td></tr></table></figure>
+<h3 id="7-状态码"><a href="#7-状态码" class="headerlink" title="7.状态码"></a>7.状态码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">200 OK          		GET</div><div class="line">201 CREATED     		POST/PUT/PATCH</div><div class="line">202 Accepted    		*</div><div class="line">204 NO CONTENT  		DELETE            删除数据成功。</div><div class="line"></div><div class="line">400 Invalid Request 	POST/PUT/PATCH</div><div class="line">401 Unauthorized 		*</div><div class="line">403 Forbidden			*</div><div class="line">404 Not Found			*</div><div class="line">406 Not Acceptable		GET</div><div class="line">410 Gone				GET	</div><div class="line">422 Unprocesable Entity POST/PUT/PATCH	</div><div class="line"></div><div class="line">500 Internal Server Error *</div></pre></td></tr></table></figure>
+<p>​    <a href="https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html" target="_blank" rel="external">详细状态码</a></p>
+<h3 id="8-错误处理"><a href="#8-错误处理" class="headerlink" title="8.错误处理"></a>8.错误处理</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  error:"Invalid API key"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="9-返回结果"><a href="#9-返回结果" class="headerlink" title="9.返回结果"></a>9.返回结果</h3><p>​    Json格式返回符合请求的操作的结果。</p>
+<p>参考：<a href="http://www.ruanyifeng.com/blog/2014/05/restful_api.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2014/05/restful_api.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/27/rest.html" data-id="cj86x84080004xdfysdwk7m7b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/30/rpc.html" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          RPC概述
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/17/dynamic-proxy.html" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">动态代理</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">June 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/07/05/java-nio.html">Java NIO Summary</a>
+          </li>
+        
+          <li>
+            <a href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/rpc.html">RPC概述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/27/rest.html">对REST的理解</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/17/dynamic-proxy.html">动态代理</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Shouly<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
