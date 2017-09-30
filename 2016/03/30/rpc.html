@@ -1,91 +1,20 @@
-<html>
-<head>
-	
-	<title>RPC概述</title>
-	<meta name="keywords" content="IT,PL,CS" />
+extends partial/layout
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+block site_title
+    != page.title + " · " + config.title
 
-    
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
+block description
+    - var desc = page.desc || page.title + ' - ' + config.author;
+    meta(name="description", content=desc)
 
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+block container
+    include mixins/post
+    +post(page)
 
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
-    
+block pagination
+    include mixins/paginator
+    +post()
+    include partial/comment
 
-</head>
-
-<body>
-
-
-<h2 class="title">RPC概述</h2>
-</div>
-
-<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#RPC概述"><span class="toc-text">RPC概述</span></a></li></ol>
-<h2 id="RPC概述"><a href="#RPC概述" class="headerlink" title="RPC概述"></a>RPC概述</h2><blockquote>
-<p>什么是RPC？</p>
-</blockquote>
-<p>Remote Procedure Call    远程过程调用协议</p>
-<p>​    RPC是一种进程间都通信协议，允许程序调用网络上的过程或函数，而不用开发者显示的编写调用细节，使用起来就像是调用本地服务，其中的网络通信对开发者来说是透明的。RPC框架能为我们解决这些通信细节。</p>
-<p>​    “RPC的主要功能是让构建分布式计算（应用）更容易，在提供强大的远程调用能力时不损失本地调用的语义简洁性。”</p>
-<blockquote>
-<p>调用流程</p>
-</blockquote>
-<p><img src="https://www.cs.rutgers.edu/~pxk/417/notes/images/rpc-flow.png" alt="调用流程图"></p>
-<p>1.服务消费方clinet调用本地服务client stub（存根）；</p>
-<p>2.client stub封装functions信息（方法名、参数等）用于网络传输（编码、序列化）；</p>
-<p>3.client stub通过socket找到服务地址，并将消息发给服务端；</p>
-<p>4.server stub接收到消息（解码、反序列化）；</p>
-<p>5.server stub调用本地function（服务）；</p>
-<p>6.本地服务将执行结果返回给server stub；</p>
-<p>7-8.server stub将结果封装成消息（编码、序列化），通过socket 传输消息给client stub；</p>
-<p>9-10.client stub解析消息（解码、反序列化）把调用结果返回给client。</p>
-<blockquote>
-<p>RPC调用过程中要面临的问题</p>
-</blockquote>
-<ul>
-<li>序列化、反序列化    Hession| JSON|XML|Google Protocol Buffers|Thrift</li>
-<li>Socket 通信              BIO NIO</li>
-<li>服务寻址                   Zookeeper</li>
-</ul>
-<blockquote>
-<p>Java 与 RPC</p>
-</blockquote>
-<p>调用远程服务时使用代理方式封装通信细节，使用起来就像调用本地服务一样。</p>
-<p>实现方式：</p>
-<ul>
-<li><a href="https://shouly.github.io/2016/03/17/dynamic-proxy.html" target="_blank" rel="external">JDK动态代理</a></li>
-<li>字节码生成技术</li>
-</ul>
-<p>参考：<a href="https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html" target="_blank" rel="external">https://www.cs.rutgers.edu/~pxk/417/notes/03-rpc.html</a></p>
-
-<div style="display:none">
-<!-- analyse javascript -->
-</div>
-
-
-
-
-
-
-</body>
-<script type="text/javascript" color="255,0,0" opacity="0.5" count="25" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/lib/compress/libs.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/common.min.js?1482855370934"></script>
-<script>
-    Util.mouseClickEffects();
-</script>
-</html>
+block copyright
+    include partial/copyright

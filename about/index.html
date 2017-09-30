@@ -1,56 +1,20 @@
-<html>
-<head>
-	
-	<title>About Me</title>
-	<meta name="keywords" content="IT,PL,CS" />
+extends partial/layout
 
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+block site_title
+    != page.title + " · " + config.title
 
-    
-	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
-    
-        <script src="/js/util.js"></script>
-        <script>
-            if(isMobile()) {
-                loadjscssfile('../css/mobile.css', 'css');
-            } else {
-                loadjscssfile('../css/desktop.css', 'css');
-            }
-        </script> 
-    
+block description
+    - var desc = page.desc || page.title + ' - ' + config.author;
+    meta(name="description", content=desc)
 
-    <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
+block container
+    include mixins/post
+    +post(page)
 
-    
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
-    
+block pagination
+    include mixins/paginator
+    +post()
+    include partial/comment
 
-</head>
-
-<body>
-
-
-<h2 class="title">About Me</h2>
-</div>
-
-<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#About-Me"><span class="toc-text">About Me</span></a></li></ol>
-<h3 id="About-Me"><a href="#About-Me" class="headerlink" title="About Me"></a>About Me</h3><p>Email：shoulyliang@gmail.com</p>
-
-<div style="display:none">
-<!-- analyse javascript -->
-</div>
-
-
-
-
-
-
-</body>
-<script type="text/javascript" color="255,0,0" opacity="0.5" count="25" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/lib/compress/libs.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/common.min.js?1482855370934"></script>
-<script>
-    Util.mouseClickEffects();
-</script>
-</html>
+block copyright
+    include partial/copyright
