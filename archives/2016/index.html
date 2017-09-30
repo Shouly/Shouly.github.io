@@ -2,21 +2,28 @@
 <head>
 	
 	<title></title>
-	<meta name="keywords" content="IT,PL,CS..." />
+	<meta name="keywords" content="fzb.me,冯宗宝,冯宗宝的blog" />
 
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     
-    <!--<link rel="stylesheet" href="/css/main.css">-->
-	<link href="/css/main.css?v=2" rel="stylesheet" type="text/css" />
-    <!--<link rel="stylesheet" href="/css/style.css">-->
+	   <link href="/css/main.css?v=3" rel="stylesheet" type="text/css" />
+    
+        <script src="/js/util.js"></script>
+        <script>
+            if(isMobile()) {
+                loadjscssfile('../css/mobile.css', 'css');
+            } else {
+                loadjscssfile('../css/desktop.css', 'css');
+            }
+        </script> 
     
 
     <link rel="alternate" type="application/atom+xml" href="/atom.xml" title="Atom feed">
 
     
-	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2"/>
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=3"/>
     
 
 </head>
@@ -45,11 +52,19 @@
                     </li>
                 
                     <li >
-                        <a href="https://github.com/Shouly"> GitHub</a>
+                        <a href="/apollo"> Apollo</a>
+                    </li>
+                
+                    <li >
+                        <a href="/beanstalkd"> Beanstalkd</a>
                     </li>
                 
                     <li >
                         <a href="/about"> About</a>
+                    </li>
+                
+                    <li >
+                        <a href="https:github.com/mickeyouyou"> GitHub</a>
                     </li>
                 
             
@@ -58,66 +73,67 @@
     </div><!-- /.container-fluid -->
 </nav>
 
-<div style="margin: 5% 10% 2% 10%">
-    <table style="width: 100%">
-        <tbody>
-            <tr>
-                <td width="70%">
-                    <ul class="list-group">
-                        
-                        
-                        
+<div class="row" style="padding-top: 70px">
+    <div class="container center-block">
+        <div class="col-md-2"></div>
+        <div class="col-md-8 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Blog</h3>
+                </div>
+                <ul class="list-group">
+                    
+                    
+                    
 <li class="list-group-item title">
-    <a  href="/2016/07/05/java-nio.html">Java NIO Summary</a>
+    <a target="_blank" href="/2016/07/05/java-nio.html">Java NIO Summary</a>
 </li>
 
 
-                        
-                        
+                    
+                    
 <li class="list-group-item title">
-    <a  href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
+    <a target="_blank" href="/2016/06/23/dislock.html">分布式锁的几种实现方式</a>
 </li>
 
 
-                        
-                        
+                    
+                    
 <li class="list-group-item title">
-    <a  href="/2016/03/30/rpc.html">RPC概述</a>
+    <a target="_blank" href="/2016/03/30/rpc.html">RPC概述</a>
 </li>
 
 
-                        
-                        
+                    
+                    
 <li class="list-group-item title">
-    <a  href="/2016/03/27/rest.html">对REST的理解</a>
+    <a target="_blank" href="/2016/03/27/rest.html">对REST的理解</a>
 </li>
 
 
-                        
-                        
+                    
+                    
 <li class="list-group-item title">
-    <a  href="/2016/03/17/dynamic-proxy.html">动态代理</a>
+    <a target="_blank" href="/2016/03/17/dynamic-proxy.html">动态代理</a>
 </li>
 
 
-                        
-                        
-                    </ul>
-                </td>
-                <td width="20%" valign="top"></td>
-            </tr>
-        </tbody>
-    </table>    
+                    
+                    
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+        </div>
+<div style="display:none">
+<script src="http://s4.cnzz.com/stat.php?id=undefined&web_id=undefined" language="JavaScript"></script>
+</div>
+    </div>
 </div>
 
 
 
 
 </body>
-<script type="text/javascript" color="255,0,0" opacity="0.5" count="25" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/lib/compress/libs.min.js"></script>
-<script type="text/javascript" src="https://static.hacpai.com/js/common.min.js?1482855370934"></script>
-<script>
-    Util.mouseClickEffects();
-</script>
 </html>
